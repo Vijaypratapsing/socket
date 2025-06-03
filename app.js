@@ -2,15 +2,10 @@ import dotenv from "dotenv";
 dotenv.config();
 import { Server } from "socket.io";
 
-// const io = new Server({
-//   cors: {
-//    // origin: "http://localhost:5173", // Your frontend port
-//    methods: ["GET", "POST"]
-//   },
-// });
 const io = new Server({
   cors: {
-    origin: ["http://localhost:5173", "https://client-ceif.vercel.app"],
+    //origin: ""http://localhost:5173""
+    origin: "https://client-ceif.vercel.app",
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -19,8 +14,7 @@ const io = new Server({
 let onlineUser = [];
 
 const addUser = (userId, socketId) => {
-  const userExists = onlineUser.find((user) => user.userId === userId);
-  if (!userExists) {
+  if (!onlineUser.find((user) => user.userId === userId)) {
     onlineUser.push({ userId, socketId });
     console.log("User added:", userId);
   }
@@ -58,8 +52,6 @@ io.on("connection", (socket) => {
   });
 });
 
-// io.listen(4000);
-// console.log("Socket.IO server is running on port 4000");
 const PORT = process.env.PORT || 4000;
 io.listen(PORT);
 console.log(`Socket.IO server is running on port ${PORT}`);

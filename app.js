@@ -1,11 +1,17 @@
 // app.js
 import { Server } from "socket.io";
 
+// const io = new Server({
+//   cors: {
+//    // origin: "http://localhost:5173", // Your frontend port
+//    methods: ["GET", "POST"]
+//   },
+// });
 const io = new Server({
   cors: {
-   // origin: "http://localhost:5173", // Your frontend port client-ceif-eqbxu34n8-vijaypratapsings-projects.vercel.app
-    origin: "https://client-ceif.vercel.app", 
-   methods: ["GET", "POST"]
+    origin: ["http://localhost:5173", "https://client-ceif.vercel.app"],
+    methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 

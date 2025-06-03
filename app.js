@@ -1,4 +1,5 @@
-// app.js
+import dotenv from "dotenv";
+dotenv.config();
 import { Server } from "socket.io";
 
 // const io = new Server({
@@ -57,5 +58,8 @@ io.on("connection", (socket) => {
   });
 });
 
-io.listen(4000);
-console.log("Socket.IO server is running on port 4000");
+// io.listen(4000);
+// console.log("Socket.IO server is running on port 4000");
+const PORT = process.env.PORT || 4000;
+io.listen(PORT);
+console.log(`Socket.IO server is running on port ${PORT}`);
